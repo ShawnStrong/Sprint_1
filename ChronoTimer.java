@@ -27,21 +27,37 @@ public class ChronoTimer {
 		
 		while(runConsole) {
 			
-			System.out.println("Enter Your command: 'LIST' for list of commands: ");
+			System.out.println("POWER to turn on");
 			String input;
 			input = console.nextLine();
 			String [] splitted = input.split("\\s+");
 				
 			if (input.equalsIgnoreCase("POWER")) {
 				/////// adding power call, terminates if power called ???? change???
-				System.exit(0);
+				if(power == false){
+				power = true;
+				System.out.println("Welcome to the Chronotimer");	
+			}
+			else if(power == true){
+				power = false;
+				System.out.println("Shutting off ChronoTimer");
+			}			
 			}
 				
 			else if (input.equalsIgnoreCase("EXIT")) {
-				
+				System.exit(0);
 				
 			}
 			
+			while(power ==true){
+				System.out.println("Enter Your command: 'LIST' for list of commands: ");
+				input = console.nextLine();
+				
+			if(input.equalsIgnoreCase("POWER")){
+				power = false;
+				System.out.println("Shutting off ChronoTimer");
+			}
+	
 			else if (input.equalsIgnoreCase("TIME")) {
 				
 				
@@ -98,7 +114,9 @@ public class ChronoTimer {
 				System.out.println("Not a valid command, type 'LIST' to list commands: \n");
 			}	
 		}//end while
+		}
 	}
+	
 	
 	
 	static boolean getPower() {
