@@ -248,7 +248,7 @@ public class ChronoTimer {
 					{
 						Racer temp = toFinish.remove();
 						temp.fin = time.millis();
-						colmpeted.add(temp);
+						completed.add(temp);
 					}
 					else
 					{
