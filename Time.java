@@ -36,6 +36,11 @@ public class Time {
 		
 	}
 	
+	public void reset(int time){
+		// resets time to system time? or zeros?
+	}
+	
+	
 	/**
 	 * Converts a string into the number of milliseconds that string represents
 	 * @param unformatted - an unformatted string to be converted into milliseconds
