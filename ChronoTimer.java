@@ -91,7 +91,8 @@ public class ChronoTimer {
 			else if (splitted[0].equalsIgnoreCase("EVENT") && power) {
 				
 				event = true;
-				System.out.println("Individual event intiated \n");
+				System.out.println("Individual Race has been Selected\n");
+				System.out.println("Waiting for Newrun: Type Newrun\n");
 			}
 
 			else if (splitted[0].equalsIgnoreCase("RESET") && power) {
@@ -104,6 +105,7 @@ public class ChronoTimer {
 				
 				run = true;
 				System.out.println("New run initiated \n");
+				System.out.println("'list' for lists of commands\n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("NUM") && power && event && run) {
