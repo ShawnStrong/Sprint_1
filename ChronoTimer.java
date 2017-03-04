@@ -72,18 +72,7 @@ public class ChronoTimer {
 			}
 
 			else if (splitted[0].equalsIgnoreCase("RESET") && power) {
-				channels[0].top = false;
-				channels[0].bottom = false;
-				channels[1].top = false;
-				channels[1].bottom = false;
-				channels[2].top = false;
-				channels[2].bottom = false;
-				channels[3].top = false;
-				channels[3].bottom = false;
-				//reset Racer queue to empty
-				racers.clear();
-				//reset time
-				//TODO
+				reset();
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run)
@@ -188,6 +177,24 @@ public class ChronoTimer {
 			System.out.println("The power is off \n");
 		}
 	}
+	
+	
+	static void reset() {
+		channels[0].top = false;
+		channels[0].bottom = false;
+		channels[1].top = false;
+		channels[1].bottom = false;
+		channels[2].top = false;
+		channels[2].bottom = false;
+		channels[3].top = false;
+		channels[3].bottom = false;
+		run = false;
+		event = false;
+		racers.clear();
+		toFinish.clear();
+		completed.clear();
+	}
+	
 
 	static void togChannel(int input){
 		int channel = (int) Math.ceil((double) input / 2) - 1;
