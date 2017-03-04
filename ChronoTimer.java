@@ -151,7 +151,7 @@ public class ChronoTimer {
 		for(int i = 0; i < completed.size(); i++){
 			Racer temp = completed.get(i);
 			
-			System.out.println("Racer " + temp.racerNum + " time: " + (temp.fin - temp.start));
+			System.out.println("\nRacer " + temp.racerNum + " time: " + (temp.fin - temp.start) + "\n");
 			
 		}
 	}
