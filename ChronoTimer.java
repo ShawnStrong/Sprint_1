@@ -103,9 +103,7 @@ public class ChronoTimer {
 
 			}
 			else if (splitted[0].equalsIgnoreCase("TRIG") && power && event && run && !racers.isEmpty()) {
-				System.out.println("enter which channel to trigger: ");
-				input = console.nextLine();
-				// CHECK IF INPUT IS A VALID CHANNEL NUMBER
+				trigChannel(Integer.parseInt(splitted[1]));
 
 			}
 			else if (splitted[0].equalsIgnoreCase("TOG") && power && event && run) {
