@@ -1,148 +1,277 @@
 package home;
 
-import java.io.*;
 import java.util.*;
+import java.time.*;
 
-public class Simulator {
-	
-Scanner console;
-File actual;
+public class ChronoTimer {
+	// system
+	static boolean power;
+	static boolean run;
+	static boolean event;
+	static boolean out;
+	static Scanner console = new Scanner(System.in);
+	static Channel[] channels = new Channel[4];
+	// race
+	static int totRacers;
+	//static Queue<Racer> racers = new LinkedList<Racer>();
+	static LinkedList<Racer> racers = new LinkedList<Racer>();
+	static LinkedList<Racer> toFinish = new LinkedList<Racer>();
+	static LinkedList<Racer> completed = new LinkedList<Racer>();
+	// time
+	static Clock time;
+	static LocalTime time2;
+	static double start;
+	static Time stopWatch;
 
-Simulator() {
+	public ChronoTimer() {
+
+		ChronoTimer.power = false;
+		ChronoTimer.run = false;
+		ChronoTimer.event = false;
+		for(int i = 0; i < 4; i++){
+			channels[i] = new Channel();
+		}
+	}
+
+	public static void main(String args[]) {
 		
-	this.console = new Scanner(System.in);
-	this.actual = null;
-}
-	
-	public void textReader() {
-		
-		boolean querySuccess = false;
-		
-		while (!(querySuccess)) {
-			// Select either file or input
-			System.out.println("\ntype 'file' to read from file or 'input' for manual inputs: " );
-			String selection = console.next();
+		for (int i = 0; i < 4; i++) {
 			
-			if (selection.equalsIgnoreCase("file")) {
-				
-				boolean checkRun = true;
-				querySuccess = true;
-				
-				while (checkRun) {
-					
-					//querySuccess = true;
-					System.out.println("\nwhich file would you like to run?(enter 'run1' or 'run2') ");
-					String input = console.next();
-					
-					if (input.equalsIgnoreCase("run1")) {
-						
-						actual = new File("src/CTS1RUN1.txt");
-						checkRun = false;
-					}
-					
-					else if(input.equalsIgnoreCase("run2")) {
-						
-						actual = new File("src/CTS1RUN2.txt");
-						checkRun = false;
-					}
-					
-					else {
-						
-						System.out.println("\nnot a valid file: enter either 'run1' or 'run2'");
-					}
-				}
-				//a correct file has been selected and will now be read
-				try (BufferedReader br = new BufferedReader(new FileReader(actual))){
+			channels[i] = new Channel();
+		}
+		stopWatch = new Time();
+		Simulator Chrono = new Simulator();
+		time = Clock.systemUTC();
+		start = time.millis();
+		Chrono.textReader();
+	}
 
-					String[] split = { "", "" };
-					String line = br.readLine();
-					
-					while (line != null) {
-							
-						split = line.split("\\s+");
-						System.out.print(split[1]);
-						
-						if(split.length > 2){
-							System.out.println(" "+split[2]);
-						}
-							
-						if (split[1].equalsIgnoreCase("POWER")) {
-							
-							ChronoTimer.setPower();
-						}
-							
-						else if (split[1].equalsIgnoreCase("EXIT")) {
-							
-							System.out.println("\nExiting program, goodbye ");
-							System.exit(0);
-						}
-						
-						else if (split[1].equalsIgnoreCase("EVENT")) {
-							
-							if (split[2].equalsIgnoreCase("IND")) {
-								System.out.println("Event is set to Individual Race \n");
-							}
-						}
-						
-						else if (split[1].equalsIgnoreCase("NEWRUN")) {
-							
-						}
-						
-						else if (split[1].equalsIgnoreCase("ENDRUN")) {
-							
-						}
-						
-						else if (split[1].equalsIgnoreCase("TIME")) {
-							
-							ChronoTimer.stopWatch.setTime(split[2]);	
-							System.out.println("You set the time at: " + split[2] + "\n");
-						}
-						
-						else if (split[1].equalsIgnoreCase("NUM")) {
-							
-						}
-						
-						else if (split[1].equalsIgnoreCase("TOG")) {
-							
-							ChronoTimer.togChannel(Integer.parseInt(split[2]));
-							System.out.println("You just toggled: " + split[2] + "\n");
-						}
-						
-						else if (split[1].equalsIgnoreCase("TRIG")) {
-							
-							System.out.println("You just triggered: " + split[2] + "\n");
-							ChronoTimer.trigChannel(Integer.parseInt(split[2]));
-						}
-						
-						// Text files never call these buttons. 
-						
-						//else if (split[1].equalsIgnoreCase("RESET")) {Time.reset();}
-						//else if (split[1].equalsIgnoreCase("DNF")) {}
-						//else if (split[1].equalsIgnoreCase("CANCEL")) {}
-						//else if (split[1].equalsIgnoreCase("START")) {}
-						//else if (split[1].equalsIgnoreCase("FINISH")) {}
-						
-						line = br.readLine();
-						split = line.split("\\s+");
-						
-					}//end while
-				} //end try
-				catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+	static void getInput() {
+
+		boolean runConsole = true;
+
+		while (runConsole) {
+
+			if(!power) {
+				System.out.println("POWER to turn on");
 			}
 			
-			else if(selection.equalsIgnoreCase("input")) {
+			String input;
+			input = console.nextLine();
+			String[] splitted = input.split("\\s+");
+
+			if (splitted[0].equalsIgnoreCase("POWER")) {
+				/////// adding power call, terminates if power called ????
+				/////// change???
+				if (power == false) {
+					power = true;
+					System.out.println("Welcome to the Chronotimer");
+				} else if (power == true) {
+					power = false;
+					System.out.println("Shutting off ChronoTimer");
+				}
+			}
+
+			else if (splitted[0].equalsIgnoreCase("EXIT")) {
+				System.exit(0);
+
+			}
+			
+			else if(splitted[0].equalsIgnoreCase("EVENT") && power) {
+				event = true;
+			}
+
+			else if (splitted[0].equalsIgnoreCase("RESET") && power) {
+				reset();
+			}
+			
+			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run) {
+				run = true;
+			}
+			else if (splitted[0].equalsIgnoreCase("NUM") && power && event && run) {
+
+				totRacers++;
+				racers.add(new Racer(Integer.parseInt(splitted[1]), totRacers));
+			}
+			else if (splitted[0].equalsIgnoreCase("START") && power && event && run && !racers.isEmpty()) {
+				trigChannel(1);
+			}
+
+			else if (splitted[0].equalsIgnoreCase("FINISH") && power && event && run && !racers.isEmpty()) {
+				trigChannel(2);
+			}
+			else if (splitted[0].equalsIgnoreCase("TRIG") && power && event && run) {
+				trigChannel(Integer.parseInt(splitted[1]));
+
+			}
+			else if (splitted[0].equalsIgnoreCase("TOG") && power && event && run) {
+				togChannel(Integer.parseInt(splitted[1]));
+			}
+			else if (splitted[0].equalsIgnoreCase("PRINT") && power && event && run){
+				receipt();
+			}
+			else if (splitted[0].equalsIgnoreCase("ENDRUN")&& power && event && run){
+				run = false;
+			}
+			else if (splitted[0].equalsIgnoreCase("TIME")) {
+
+			}
+		
+			else if (splitted[0].equalsIgnoreCase("DNF")) {
+				// Remove first racer from toFinish, set his finish time to -1, then add him to the completed list
+				Racer temp = toFinish.removeFirst();
+				temp.fin = -1;
+				completed.add(temp);	
+			}
+
+			else if (splitted[0].equalsIgnoreCase("CANCEL")) {
 				
-				querySuccess = true;
-				ChronoTimer.getInput();
+				// Remove first racer from toFinish, set his start time to 0, then add him to racers
+				
+				Racer temp = toFinish.removeFirst();
+				temp.start = 0;
+				racers.addFirst(temp); 
+			}
+			
+			else if (splitted[0].equalsIgnoreCase("LIST")) {
+
+				System.out.println("POWER: end program. \n" + "EXIT: \n" + "RESET: reset all run times and settings \n"
+						+ "TIME: \n" + "DNF: end that racers run, with no finish time\n" + "NUM: to create racer\n"
+						+ "...................... \n");
+			}
+
+			else {
+				System.out.println("Not a valid command, type 'LIST' to list commands: \n");
+			}
+		}
+	} // end while
+
+	static void receipt() {
+		// Cycles through the completed linkedlist and prints out the racer's number and time
+		for(int i = 0; i < completed.size(); i++){
+			
+			System.out.println("Racer " + completed.get(i).racerNum + " time: ");
+			
+		}
+	}
+	static void startTime() {
+		start = time.millis();
+	}
+
+	static double finishTime() {
+		return (time.millis() - start) / 100;
+		// System.out.println(LocalTime.now());
+
+	}
+	// returns the current value/state of power 
+	static boolean getPower() {
+
+		return power;
+	}
+	// sets the power to be its opposite value
+	static void setPower() {
+
+		power = !power;	
+		
+		if (power == true) {
+			
+			System.out.println("\nThe power is on\n");
+		}
+		
+		else {
+			System.out.println("\nThe power is off\n");
+		}
+	}
+	
+	static void reset() {
+		
+		channels[0].top = false;
+		channels[0].bottom = false;
+		channels[1].top = false;
+		channels[1].bottom = false;
+		channels[2].top = false;
+		channels[2].bottom = false;
+		channels[3].top = false;
+		channels[3].bottom = false;
+		run = false;
+		event = false;
+		racers.clear();
+		toFinish.clear();
+		completed.clear();
+	}
+	
+	static void togChannel(int input) {
+		
+		int channel = (int) Math.ceil((double) input / 2) - 1;
+		
+		if (input % 2 == 0){
+			
+			if (!channels[channel].bottom) {
+				channels[channel].bottom = true;
+			}
+			
+			else {
+				channels[channel].bottom = false;
+			}
+		}
+		
+		else {
+			
+			if (!channels[channel].top) {
+				
+				channels[channel].top = true;
 			}
 			
 			else {
 				
-				System.out.println("not a valid input");
-			}	
-		}	
+				channels[channel].top = false;
+			}
+		}
 	}
+	
+	static void trigChannel(int parseInt) {
+		
+		int channel = (int) Math.ceil((double) parseInt / 2) - 1;
+		
+		if (channel < 3 && channel >= 0) {
+
+			if (parseInt % 2 == 1) {
+				
+				if (!racers.isEmpty()) {
+					
+					if (channels[channel].top == true) {
+						Racer temp = racers.remove();
+						temp.start = time.millis();
+						toFinish.add(temp);
+					} 
+					
+					else {
+						System.out.println("channel was not toggled");
+					}
+
+				}
+			}
+			
+			if (parseInt % 2 == 0) {
+				
+				if (!toFinish.isEmpty()) {
+					
+					if (channels[channel].bottom == true) {
+						
+						Racer temp = toFinish.remove();
+						temp.fin = time.millis();
+						completed.add(temp);
+					} 
+					
+					else {
+						System.out.println("channel was not toggled");
+					}
+				}
+			}
+		}
+		
+		else {
+			System.out.println("invlaid channel number");
+		}
+	}	
 }
