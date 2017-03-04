@@ -204,7 +204,7 @@ public class ChronoTimer {
 
 	static void togChannel(int input){
 		int channel = (int) Math.ceil((double) input / 2) - 1;
-		if(input % 2 == 1){
+		if(input % 2 == 0){
 			
 			if(!channels[channel].bottom){
 				channels[channel].bottom = true;
