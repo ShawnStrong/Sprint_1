@@ -114,6 +114,9 @@ Simulator() {
 							ChronoTimer.trigChannel(Integer.parseInt(split[2]));
 						}
 						
+						else if (split[1].equalsIgnoreCase("PRINT")){
+							ChronoTimer.receipt();
+						}
 						// Text files never call these buttons. 
 						
 						//else if (split[1].equalsIgnoreCase("RESET")) {Time.reset();}
