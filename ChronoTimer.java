@@ -158,8 +158,21 @@ public class ChronoTimer {
 			
 			else if (splitted[0].equalsIgnoreCase("LIST")) {
 
-				System.out.println("POWER: end program. \n" + "EXIT: \n" + "RESET: reset all run times and settings \n"
-						+ "TIME: \n" + "DNF: end that racers run, with no finish time\n" + "NUM: to create racer\n"
+					System.out.println("POWER: on/off \n" 
+						+ "EXIT: exits program \n" 
+						+ "RESET: reset all run times and settings \n"
+						+ "TIME: \n" 
+						+ "DNF: end that racers run, with no finish time\n" 
+						+ "NUM: to create racer\n"
+						+ "EVENT: to choose event"
+						+ "NEWRUN: start a new run"
+						+ "ENDRUN: end current run"
+						+ "START: activate trigger"
+						+ "FINISH: deactivate trigger"
+						+ "TRIG: trigger to activate"
+						+ "TOG: toggle to activate"
+						+ "PRINT: print results"
+						+ "CANCEL: discard current race"
 						+ "...................... \n");
 			}
 
