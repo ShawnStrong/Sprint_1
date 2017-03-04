@@ -106,8 +106,8 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("TRIG")) {
 							
+							System.out.println("You just triggered: " + split[2]);
 							ChronoTimer.trigChannel(Integer.parseInt(split[2]));
-							System.out.println("You just triggered: " + split[2] + "\n");
 						}
 						
 						// Text files never call these buttons. 
