@@ -176,19 +176,15 @@ public class ChronoTimer {
 		return power;
 	}
 
-	static boolean setPower() {
+	static void setPower() {
 
-		if (!power) {
-			power = true;
-		} else if (power) {
-			power = false;
-			// end program? restart simulator?
-		} else {
-			return false;
+		power = !power;	
+		
+		if (power == true) {
+			
+			System.out.println("The power is on \n");
 		}
-
-		return true;
-
+		
+		System.out.println("The power is off \n");
 	}
-
 }
