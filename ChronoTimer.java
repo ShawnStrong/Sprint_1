@@ -149,7 +149,7 @@ public class ChronoTimer {
 		// Cycles through the completed linkedlist and prints out the racer's number and time
 		for(int i = 0; i < completed.size(); i++){
 			
-			System.out.println("Racer " + completed.get(i).racerNum + "time: ");
+			System.out.println("Racer " + completed.get(i).racerNum + " time: ");
 			
 		}
 	}
