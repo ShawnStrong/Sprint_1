@@ -275,6 +275,9 @@ public class ChronoTimer {
 					}
 
 				}
+				else {
+					System.out.println("channel was not toggled");
+				}
 			}
 			
 			if (parseInt % 2 == 0) {
@@ -291,6 +294,9 @@ public class ChronoTimer {
 					else {
 						System.out.println("channel was not toggled");
 					}
+				}
+				else {
+					System.out.println("channel was not toggled");
 				}
 			}
 		}
