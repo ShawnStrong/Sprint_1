@@ -14,8 +14,9 @@ public class ChronoTimer {
 	// race
 	static int totRacers;
 	//static Queue<Racer> racers = new LinkedList<Racer>();
-	static ArrayList<Racer> racers = new ArrayList<Racer>();
-	static ArrayList<Racer> toFinish = new ArrayList<Racer>();
+	static LinkedList<Racer> racers = new LinkedList<Racer>();
+	static LinkedList<Racer> toFinish = new LinkedList<Racer>();
+	static LinkedList<Racer> completed = new LinkedList<Racer>();
 	// time
 	static Clock time;
 	static LocalTime time2;
@@ -127,11 +128,17 @@ public class ChronoTimer {
 				toFinish.remove(0);
 				//Finish time is equal to DNF
 				
+				//Print DNF on the printing receipt
+				
+				
 			}
 
 			else if (splitted[0].equalsIgnoreCase("CANCEL")) {
-				toFinish.remove(0);
-			//	racers.add(0,); still not sure on how to add the racer to the toStart queue properly
+				Racer temp = toFinish.getFirst();
+				toFinish.removeFirst();
+				racers.add(0,temp); 
+				//still not sure if this is the correct way to do this
+				//TODO reset start and finish time TODO 
 			}
 			else if (splitted[0].equalsIgnoreCase("LIST")) {
 
