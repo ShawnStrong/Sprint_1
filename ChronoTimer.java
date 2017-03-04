@@ -137,6 +137,8 @@ public class ChronoTimer {
 			
 			else if (splitted[0].equalsIgnoreCase("TIME")) {
 
+				stopWatch.setTime(splitted[1]);
+				System.out.println("You set the time at: " + splitted[1] + "\n");
 			}
 		
 			else if (splitted[0].equalsIgnoreCase("DNF")) {
