@@ -97,7 +97,7 @@ public class ChronoTimer {
 			else if (splitted[0].equalsIgnoreCase("FINISH") && power && event && run && !racers.isEmpty()) {
 
 			}
-			else if (splitted[0].equalsIgnoreCase("TRIG") && power && event && run && !racers.isEmpty()) {
+			else if (splitted[0].equalsIgnoreCase("TRIG") && power && event && run) {
 				trigChannel(Integer.parseInt(splitted[1]));
 
 			}
