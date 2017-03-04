@@ -20,7 +20,7 @@ Simulator() {
 		
 		while (!(querySuccess)) {
 			// Select either file or input
-			System.out.println("type 'file' to read from file or 'input' for manual inputs: \n" );
+			System.out.println("\ntype 'file' to read from file or 'input' for manual inputs: " );
 			String selection = console.next();
 			
 			if (selection.equalsIgnoreCase("file")) {
@@ -31,24 +31,24 @@ Simulator() {
 				while (checkRun) {
 					
 					//querySuccess = true;
-					System.out.println("which file would you like to run?(enter 'run1' or 'run2')");
+					System.out.println("\nwhich file would you like to run?(enter 'run1' or 'run2') ");
 					String input = console.next();
 					
 					if (input.equalsIgnoreCase("run1")) {
 						
-						actual = new File("src/run1.txt");
+						actual = new File("src/CTS1RUN1.txt");
 						checkRun = false;
 					}
 					
 					else if(input.equalsIgnoreCase("run2")) {
 						
-						actual = new File("src/run2.txt");
+						actual = new File("src/CTS1RUN2.txt");
 						checkRun = false;
 					}
 					
 					else {
 						
-						System.out.println("not a valid file: enter either 'run1' or 'run2'");
+						System.out.println("\nnot a valid file: enter either 'run1' or 'run2'");
 					}
 				}
 				//a correct file has been selected and will now be read
@@ -62,44 +62,57 @@ Simulator() {
 						split = line.split("\\s+");
 						System.out.println(line);
 							
-						if (split[0].equalsIgnoreCase("POWER")) {
+						if (split[1].equalsIgnoreCase("POWER")) {
 							
 							ChronoTimer.setPower();
 						}
 							
-						else if (split[0].equalsIgnoreCase("EXIT")) {
+						else if (split[1].equalsIgnoreCase("EXIT")) {
 							
 							System.out.println("Exiting program, goodbye \n");
 							System.exit(0);
 						}
 						
-						else if (split[0].equalsIgnoreCase("EVENT")) {
+						else if (split[1].equalsIgnoreCase("EVENT")) {
 							
-							if (split[1].equalsIgnoreCase("IND")) {
+							if (split[2].equalsIgnoreCase("IND")) {
 								
 							}
 						}
 						
-						else if (split[0].equalsIgnoreCase("TIME")) {
-							
-							// getTime();
-						}
-						
-						else if (split[0].equalsIgnoreCase("TOG")) {
+						else if (split[1].equalsIgnoreCase("NEWRUN")) {
 							
 						}
 						
-						else if (split[0].equalsIgnoreCase("TRIG")) {
+						else if (split[1].equalsIgnoreCase("ENDRUN")) {
+							
+						}
+						
+						else if (split[1].equalsIgnoreCase("TIME")) {
+							
+							System.out.println("The current time is: \n");
+							Time.getCurrentTime();
+						}
+						
+						else if (split[1].equalsIgnoreCase("NUM")) {
+							
+						}
+						
+						else if (split[1].equalsIgnoreCase("TOG")) {
+							
+						}
+						
+						else if (split[1].equalsIgnoreCase("TRIG")) {
 							
 						}
 						
 						// Text files never call these buttons. 
 						
-						//else if (split[0].equalsIgnoreCase("RESET")) {Time.reset();}
-						//else if (split[0].equalsIgnoreCase("DNF")) {}
-						//else if (split[0].equalsIgnoreCase("CANCEL")) {}
-						//else if (split[0].equalsIgnoreCase("START")) {}
-						//else if (split[0].equalsIgnoreCase("FINISH")) {}
+						//else if (split[1].equalsIgnoreCase("RESET")) {Time.reset();}
+						//else if (split[1].equalsIgnoreCase("DNF")) {}
+						//else if (split[1].equalsIgnoreCase("CANCEL")) {}
+						//else if (split[1].equalsIgnoreCase("START")) {}
+						//else if (split[1].equalsIgnoreCase("FINISH")) {}
 						
 						line = br.readLine();
 						split = line.split("\\s+");
