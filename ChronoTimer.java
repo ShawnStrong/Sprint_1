@@ -132,11 +132,12 @@ public class ChronoTimer {
 			}
 
 			else if (splitted[0].equalsIgnoreCase("CANCEL")) {
-				Racer temp = toFinish.getFirst();
-				toFinish.removeFirst();
-				racers.add(0,temp); 
-				//still not sure if this is the correct way to do this
-				//TODO reset start and finish time TODO 
+				
+				// Remove first racer from toFinish, set his start time to 0, then add him to racers
+				
+				Racer temp = toFinish.removeFirst();
+				temp.start = 0;
+				racers.addFirst(temp); 
 			}
 			else if (splitted[0].equalsIgnoreCase("LIST")) {
 
