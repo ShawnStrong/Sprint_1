@@ -70,7 +70,18 @@ public class ChronoTimer {
 			}
 
 			else if (input.equalsIgnoreCase("RESET") && power) {
-
+				one.top = false;
+				one.bottom =false;
+				two.top =false;
+				two.bottom =false;
+				three.top =false;
+				three.bottom=false;
+				four.top =false;
+				four.bottom =false;
+				//reset Racer queue to empty
+				racers.clear();
+				//reset time
+				//TODO
 			}
 			
 			else if (input.equalsIgnoreCase("NEWRUN") && power && event && !run)
