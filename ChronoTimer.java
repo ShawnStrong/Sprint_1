@@ -189,8 +189,6 @@ public class ChronoTimer {
 						+ "PRINT: print results\n"
 						+ "CANCEL: discard current race\n"
 						+ "...................... \n");
-					
-					System.out.println("Enter a command\n");
 			}
 
 			else {
