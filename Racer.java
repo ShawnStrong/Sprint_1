@@ -1,8 +1,8 @@
 public class Racer {
 	public int racerNum;
 	public int totalRacers;
-	public int start;
-	public int fin;
+	public long start;
+	public long fin;
 	public int index;
 	public int x;
 	public int y;
