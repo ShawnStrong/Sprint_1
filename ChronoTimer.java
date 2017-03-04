@@ -68,7 +68,7 @@ public class ChronoTimer {
 			
 			else if(splitted[0].equalsIgnoreCase("EVENT") && power)
 			{
-				
+				event = true;
 			}
 
 			else if (splitted[0].equalsIgnoreCase("RESET") && power) {
