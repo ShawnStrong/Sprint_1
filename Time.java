@@ -2,7 +2,6 @@ package home;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class Time {
 	
 	private long runTime;
