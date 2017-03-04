@@ -159,22 +159,23 @@ public class ChronoTimer {
 			
 			else if (splitted[0].equalsIgnoreCase("LIST")) {
 
-					System.out.println("POWER: on/off \n" 
-						+ "EXIT: exits program \n" 
-						+ "RESET: reset all run times and settings \n"
-						+ "TIME: sets current time\n" 
-						+ "DNF: end that racers run, with no finish time\n" 
-						+ "NUM: to create racer\n"
-						+ "EVENT: to choose event\n"
-						+ "NEWRUN: start a new run\n"
-						+ "ENDRUN: end current run\n"
-						+ "START: activate trigger\n"
-						+ "FINISH: deactivate trigger\n"
-						+ "TRIG: trigger to activate\n"
-						+ "TOG: toggle to activate\n"
-						+ "PRINT: print results\n"
-						+ "CANCEL: discard current race\n"
-						+ "...................... \n");
+				System.out.println("POWER: on/off \n" 
+					+ "EXIT: exits program \n" 
+					+ "RESET: reset all run times and settings \n"
+					+ "TIME: sets current time\n" 
+					+ "DNF: end that racers run, with no finish time\n" 
+					+ "NUM: to create racer\n"
+					+ "EVENT: to choose event\n"
+					+ "NEWRUN: start a new run\n"
+					+ "ENDRUN: end current run\n"
+					+ "START: activate trigger\n"
+					+ "FINISH: deactivate trigger\n"
+					+ "TRIG: trigger to activate\n"
+					+ "TOG: toggle to activate\n"
+					+ "PRINT: print results\n"
+					+ "CANCEL: discard current race\n"
+					+ "...................... \n");
+				System.out.println("Enter a command\n"
 			}
 
 			else {
