@@ -21,6 +21,7 @@ public class ChronoTimer {
 	static Clock time;
 	static LocalTime time2;
 	static double start;
+	static Time stopWatch;
 
 	public ChronoTimer() {
 
@@ -38,7 +39,7 @@ public class ChronoTimer {
 			
 			channels[i] = new Channel();
 		}
-		
+		stopWatch = new Time();
 		Simulator Chrono = new Simulator();
 		time = Clock.systemUTC();
 		start = time.millis();
