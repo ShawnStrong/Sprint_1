@@ -205,4 +205,50 @@ public class ChronoTimer {
 			}
 		}
 	}
+	
+	static void trigChannel(int parseInt) {
+		int channel = (int) Math.ceil((double) parseInt / 2) - 1;
+		
+		if(channel < 3 && channel >=0)
+		{
+			if(!racers.isEmpty())
+			{	
+				if(parseInt%2 == 1)
+				{
+					if(channels[channel].top == true)
+					{
+						Racer temp = racers.remove();
+						temp.start = time.millis();
+						toFinish.add(temp);
+					}
+					else
+					{
+						System.out.println("channel was not toggled");
+					}	
+				}
+				else if(parseInt%2 == 0)
+				{
+					if(channels[channel].bottom == true)
+					{
+						Racer temp = toFinish.remove();
+						temp.fin = time.millis();
+						colmpeted.add(temp);
+					}
+					else
+					{
+						System.out.println("channel was not toggled");
+					}
+				}
+			}
+			else
+			{
+				System.out.println("no racer available");
+			}
+		}
+		else
+		{
+			System.out.println("invlaid channel number");
+		}
+	}
+	
 }
