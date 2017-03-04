@@ -106,7 +106,7 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("TRIG")) {
 							
-							System.out.println("You just triggered: " + split[2]);
+							System.out.println("You just triggered: " + split[2] + "\n");
 							ChronoTimer.trigChannel(Integer.parseInt(split[2]));
 						}
 						
