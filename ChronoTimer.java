@@ -1,4 +1,4 @@
-
+package home;
 
 import java.util.*;
 import java.time.*;
@@ -33,9 +33,12 @@ public class ChronoTimer {
 	}
 
 	public static void main(String args[]) {
-		for(int i = 0; i < 4; i++){
+		
+		for (int i = 0; i < 4; i++) {
+			
 			channels[i] = new Channel();
 		}
+		
 		Simulator Chrono = new Simulator();
 		time = Clock.systemUTC();
 		start = time.millis();
@@ -48,9 +51,10 @@ public class ChronoTimer {
 
 		while (runConsole) {
 
-			if(!power){
+			if(!power) {
 				System.out.println("POWER to turn on");
 			}
+			
 			String input;
 			input = console.nextLine();
 			String[] splitted = input.split("\\s+");
@@ -72,8 +76,7 @@ public class ChronoTimer {
 
 			}
 			
-			else if(splitted[0].equalsIgnoreCase("EVENT") && power)
-			{
+			else if(splitted[0].equalsIgnoreCase("EVENT") && power) {
 				event = true;
 			}
 
@@ -81,8 +84,7 @@ public class ChronoTimer {
 				reset();
 			}
 			
-			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run)
-			{
+			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run) {
 				run = true;
 			}
 			else if (splitted[0].equalsIgnoreCase("NUM") && power && event && run) {
@@ -113,17 +115,12 @@ public class ChronoTimer {
 			else if (splitted[0].equalsIgnoreCase("TIME")) {
 
 			}
-			
-
-			
-
+		
 			else if (splitted[0].equalsIgnoreCase("DNF")) {
 				// Remove first racer from toFinish, set his finish time to -1, then add him to the completed list
 				Racer temp = toFinish.removeFirst();
 				temp.fin = -1;
-				completed.add(temp);
-				
-				
+				completed.add(temp);	
 			}
 
 			else if (splitted[0].equalsIgnoreCase("CANCEL")) {
@@ -134,6 +131,7 @@ public class ChronoTimer {
 				temp.start = 0;
 				racers.addFirst(temp); 
 			}
+			
 			else if (splitted[0].equalsIgnoreCase("LIST")) {
 
 				System.out.println("POWER: end program. \n" + "EXIT: \n" + "RESET: reset all run times and settings \n"
@@ -147,7 +145,7 @@ public class ChronoTimer {
 		}
 	} // end while
 
-	static void receipt(){
+	static void receipt() {
 		// Cycles through the completed linkedlist and prints out the racer's number and time
 		for(int i = 0; i < completed.size(); i++){
 			
@@ -184,8 +182,8 @@ public class ChronoTimer {
 		}
 	}
 	
-	
 	static void reset() {
+		
 		channels[0].top = false;
 		channels[0].bottom = false;
 		channels[1].top = false;
@@ -201,61 +199,77 @@ public class ChronoTimer {
 		completed.clear();
 	}
 	
-
-	static void togChannel(int input){
+	static void togChannel(int input) {
+		
 		int channel = (int) Math.ceil((double) input / 2) - 1;
-		if(input % 2 == 0){
+		
+		if (input % 2 == 0){
 			
-			if(!channels[channel].bottom){
+			if (!channels[channel].bottom) {
 				channels[channel].bottom = true;
 			}
-			else{
+			
+			else {
 				channels[channel].bottom = false;
 			}
-		}else{
-			if(!channels[channel].top){
+			
+		}
+		
+		else {
+			
+			if (!channels[channel].top) {
 				channels[channel].top = true;
 			}
-			else{
+			
+			else {
 				channels[channel].top = false;
 			}
 		}
 	}
 	
 	static void trigChannel(int parseInt) {
+		
 		int channel = (int) Math.ceil((double) parseInt / 2) - 1;
 		
 		if (channel < 3 && channel >= 0) {
 
 			if (parseInt % 2 == 1) {
+				
 				if (!racers.isEmpty()) {
+					
 					if (channels[channel].top == true) {
 						Racer temp = racers.remove();
 						temp.start = time.millis();
 						toFinish.add(temp);
-					} else {
+					} 
+					
+					else {
 						System.out.println("channel was not toggled");
 					}
 
 				}
 			}
+			
 			if (parseInt % 2 == 0) {
+				
 				if (!toFinish.isEmpty()) {
+					
 					if (channels[channel].bottom == true) {
+						
 						Racer temp = toFinish.remove();
 						temp.fin = time.millis();
 						completed.add(temp);
-					} else {
+					} 
+					
+					else {
 						System.out.println("channel was not toggled");
 					}
 				}
 			}
-
 		}
-		else
-		{
+		
+		else {
 			System.out.println("invlaid channel number");
 		}
-	}
-	
+	}	
 }
