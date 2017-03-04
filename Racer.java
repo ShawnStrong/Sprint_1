@@ -1,5 +1,3 @@
-package home;
-
 public class Racer {
 	public int racerNum;
 	public int totalRacers;
@@ -9,10 +7,9 @@ public class Racer {
 	public int x;
 	public int y;
 	
-	public Racer (int rNum, int tRacers, int channel) {
+	public Racer (int rNum, int channel) {
 		
 		this.racerNum = rNum;
-		this.totalRacers = tRacers;
 		
 		// stores the channel to be turned on
 		this.x = totalRacers * 2 - 1;
