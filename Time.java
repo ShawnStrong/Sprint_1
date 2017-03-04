@@ -22,7 +22,7 @@ public class Time {
 	{
 		return LocalTime.now();
 	}
-	public double calcTime(int start, int fin)
+	public double calcTime(double start, double fin)
 	{
 		return (fin-start) / 100;
 		//System.out.println(LocalTime.now());
