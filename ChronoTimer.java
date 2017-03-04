@@ -112,7 +112,7 @@ public class ChronoTimer {
 				togChannel(Integer.parseInt(splitted[1]));
 			}
 			else if (splitted[0].equalsIgnoreCase("PRINT") && power && event && run){
-				
+				receipt();
 			}
 			else if (splitted[0].equalsIgnoreCase("ENDRUN")&& power && event && run){
 				run = false;
