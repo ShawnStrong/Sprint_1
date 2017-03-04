@@ -86,10 +86,14 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("NEWRUN")) {
 							
+							ChronoTimer.run = true;
+							System.out.println("\nNew run initiated\n");
 						}
 						
 						else if (split[1].equalsIgnoreCase("ENDRUN")) {
 							
+							ChronoTimer.run = false;
+							System.out.println("\nRun ended\n");
 						}
 						
 						else if (split[1].equalsIgnoreCase("TIME")) {
@@ -100,6 +104,9 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("NUM")) {
 							
+							ChronoTimer.totRacers++;
+							ChronoTimer.racers.add(new Racer(Integer.parseInt(split[2]), ChronoTimer.totRacers));
+							System.out.println("Racer: " + split[2] + " has been entered!\n");
 						}
 						
 						else if (split[1].equalsIgnoreCase("TOG")) {
