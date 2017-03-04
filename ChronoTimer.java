@@ -10,7 +10,7 @@ public class ChronoTimer {
 	static boolean event;
 	static boolean out;
 	static Scanner console = new Scanner(System.in);
-	static Channel[] channels;
+	static Channel[] channels = new Channel[4];
 	// race
 	static int totRacers;
 	//static Queue<Racer> racers = new LinkedList<Racer>();
@@ -27,11 +27,15 @@ public class ChronoTimer {
 		ChronoTimer.power = false;
 		ChronoTimer.run = false;
 		ChronoTimer.event = false;
-		ChronoTimer.channels = new Channel[4];
+		for(int i = 0; i < 4; i++){
+			channels[i] = new Channel();
+		}
 	}
 
 	public static void main(String args[]) {
-
+		for(int i = 0; i < 4; i++){
+			channels[i] = new Channel();
+		}
 		Simulator Chrono = new Simulator();
 		time = Clock.systemUTC();
 		start = time.millis();
