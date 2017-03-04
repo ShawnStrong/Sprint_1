@@ -71,8 +71,8 @@ public class ChronoTimer {
 				if (power == false) {
 					
 					power = true;
-					System.out.println("Welcome to the Chronotimer");
-					System.out.println("'list' for lists of commands\n");
+					System.out.println("Welcome to the Chronotimer\n");
+					System.out.println("Waiting for Event command: Type 'Event'\n");
 				} 
 				
 				else if (power == true) {
