@@ -155,7 +155,7 @@ public class ChronoTimer {
 			
 		}
 	}
-	}
+	
 	static void startTime() {
 		start = time.millis();
 	}
