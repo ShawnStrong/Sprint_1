@@ -60,7 +60,10 @@ Simulator() {
 					while (line != null) {
 							
 						split = line.split("\\s+");
-						System.out.println(line);
+						System.out.print(split[1]);
+						if(split.length > 2){
+							System.out.println(" "+split[2]);
+						}
 							
 						if (split[1].equalsIgnoreCase("POWER")) {
 							
