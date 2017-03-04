@@ -276,42 +276,34 @@ public class ChronoTimer {
 
 			if (parseInt % 2 == 1) {
 				
-				if (!racers.isEmpty()) {
-					
-					if (channels[channel].top == true) {
+				if (channels[channel].top == true) {
+					if (!racers.isEmpty()) {
 						Racer temp = racers.remove();
 						temp.start = time.millis();
 						toFinish.add(temp);
 					} 
-					
-					else {
-						System.out.println("channel was not toggled");
-					}
-
 				}
 				else {
 					System.out.println("channel was not toggled");
 				}
+
 			}
 			
 			if (parseInt % 2 == 0) {
-				
-				if (!toFinish.isEmpty()) {
 					
-					if (channels[channel].bottom == true) {
+				if (channels[channel].bottom == true) {
+					if (!toFinish.isEmpty()) {
 						
 						Racer temp = toFinish.remove();
 						temp.fin = time.millis();
 						completed.add(temp);
-					} 
-					
-					else {
-						System.out.println("channel was not toggled");
 					}
-				}
-				else {
+			} 
+					
+			else {
 					System.out.println("channel was not toggled");
 				}
+				
 			}
 		}
 		
