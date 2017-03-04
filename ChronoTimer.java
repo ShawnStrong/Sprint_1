@@ -70,6 +70,7 @@ public class ChronoTimer {
 					
 					power = true;
 					System.out.println("Welcome to the Chronotimer");
+					System.out.println("'list' for lists of commands\n");
 				} 
 				
 				else if (power == true) {
@@ -161,7 +162,7 @@ public class ChronoTimer {
 					System.out.println("POWER: on/off \n" 
 						+ "EXIT: exits program \n" 
 						+ "RESET: reset all run times and settings \n"
-						+ "TIME: \n" 
+						+ "TIME: sets current time\n" 
 						+ "DNF: end that racers run, with no finish time\n" 
 						+ "NUM: to create racer\n"
 						+ "EVENT: to choose event"
