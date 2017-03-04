@@ -184,7 +184,9 @@ public class ChronoTimer {
 			System.out.println("The power is on \n");
 		}
 		
-		System.out.println("The power is off \n");
+		else {
+			System.out.println("The power is off \n");
+		}
 	}
 
 	static void togChannel(int input){
