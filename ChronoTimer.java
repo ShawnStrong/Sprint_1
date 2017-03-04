@@ -44,7 +44,9 @@ public class ChronoTimer {
 
 		while (runConsole) {
 
-			System.out.println("POWER to turn on");
+			if(!power){
+				System.out.println("POWER to turn on");
+			}
 			String input;
 			input = console.nextLine();
 			String[] splitted = input.split("\\s+");
