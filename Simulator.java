@@ -90,7 +90,7 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("TIME")) {
 							
-							Time.setTime(split[2]);	
+							ChronoTimer.stopWatch.setTime(split[2]);	
 							System.out.println("You set the time at: " + split[2] + "\n");
 						}
 						
