@@ -175,7 +175,7 @@ public class ChronoTimer {
 		return power;
 	}
 	// sets the power to be its opposite value
-	static boolean setPower() {
+	static void setPower() {
 
 		power = !power;	
 		
