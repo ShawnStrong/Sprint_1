@@ -17,6 +17,7 @@ public class ChronoTimer {
 	static LinkedList<Racer> racers = new LinkedList<Racer>();
 	static LinkedList<Racer> toFinish = new LinkedList<Racer>();
 	static LinkedList<Racer> completed = new LinkedList<Racer>();
+	static boolean[] channelsOpen;
 	// time
 	static Clock time;
 	static LocalTime time2;
@@ -36,10 +37,11 @@ public class ChronoTimer {
 	}
 
 	public static void main(String args[]) {
-		
+		channelsOpen = new boolean[4];
 		for (int i = 0; i < 4; i++) {
 			
 			channels[i] = new Channel();
+			channelsOpen[i] = true;
 		}
 		
 		stopWatch = new Time();
@@ -277,8 +279,9 @@ public class ChronoTimer {
 
 			if (parseInt % 2 == 1) {
 				
-				if (channels[channel].top == true) {
+				if (channels[channel].top == true && channelsOpen[channel] == true) {
 					if (!racers.isEmpty()) {
+						channelsOpen[channel] = false;
 						Racer temp = racers.remove();
 						temp.start = time.millis();
 						toFinish.add(temp);
@@ -292,9 +295,9 @@ public class ChronoTimer {
 			
 			if (parseInt % 2 == 0) {
 					
-				if (channels[channel].bottom == true) {
+				if (channels[channel].bottom == true && channelsOpen[channel] == false) {
 					if (!toFinish.isEmpty()) {
-						
+						channelsOpen[channel] = true;
 						Racer temp = toFinish.remove();
 						temp.fin = time.millis();
 						completed.add(temp);
