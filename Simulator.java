@@ -76,7 +76,7 @@ Simulator() {
 						else if (split[1].equalsIgnoreCase("EVENT")) {
 							
 							if (split[2].equalsIgnoreCase("IND")) {
-								
+								System.out.println("Event is set to Individual Race \n");
 							}
 						}
 						
