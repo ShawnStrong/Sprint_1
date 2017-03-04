@@ -6,7 +6,7 @@ public class chronotimer_inprogress {
 
 import java.time.Clock;
 import java.time.LocalTime;
-import java.util.Scanner;
+import java.util.*;
 
 	public class ChronoTimer {
 		
@@ -14,7 +14,7 @@ import java.util.Scanner;
 		static Scanner console = new Scanner(System.in);
 		boolean chanTog [] = new boolean[9];
 		static int totRacers;
-		static Racer [] racers = new Racer[5];
+		static Queue<Racer> racers = new LinkedList<Racer>();
 		//time
 		static Clock time;
 		static LocalTime time2;
@@ -112,7 +112,7 @@ import java.util.Scanner;
 				else if (splitted[0].equalsIgnoreCase("NUM")) {
 					
 					totRacers++;
-					racers[totRacers] = new Racer (Integer.parseInt(splitted[1]), totRacers);
+					racers.add(new Racer(Integer.parseInt(splitted[1]), totRacers));
 				}
 				
 				else if (input.equalsIgnoreCase("LIST")) {
