@@ -155,25 +155,22 @@ public class ChronoTimer {
 		// System.out.println(LocalTime.now());
 
 	}
-
+	// returns the current value/state of power 
 	static boolean getPower() {
 
 		return power;
 	}
-
+	// sets the power to be its opposite value
 	static boolean setPower() {
 
-		if (!power) {
-			power = true;
-		} else if (power) {
-			power = false;
-			// end program? restart simulator?
-		} else {
-			return false;
+		power = !power;	
+		
+		if (power == true) {
+			
+			System.out.println("The power is on \n");
 		}
-
-		return true;
-
+		
+		System.out.println("The power is off \n");
 	}
 
 	static void togChannel(int input){
