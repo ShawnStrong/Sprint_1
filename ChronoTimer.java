@@ -123,10 +123,10 @@ public class ChronoTimer {
 			
 
 			else if (splitted[0].equalsIgnoreCase("DNF")) {
-				toFinish.remove(0);
-				//Finish time is equal to DNF
-				
-				//Print DNF on the printing receipt
+				// Remove first racer from toFinish, set his finish time to -1, then add him to the completed list
+				Racer temp = toFinish.removeFirst();
+				temp.fin = -1;
+				completed.add(temp);
 				
 				
 			}
