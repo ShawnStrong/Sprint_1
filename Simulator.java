@@ -61,6 +61,7 @@ Simulator() {
 							
 						split = line.split("\\s+");
 						System.out.print(split[1]);
+						
 						if(split.length > 2){
 							System.out.println(" "+split[2]);
 						}
@@ -72,7 +73,7 @@ Simulator() {
 							
 						else if (split[1].equalsIgnoreCase("EXIT")) {
 							
-							System.out.println("Exiting program, goodbye \n");
+							System.out.println("\nExiting program, goodbye ");
 							System.exit(0);
 						}
 						
