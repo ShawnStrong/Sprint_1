@@ -112,7 +112,7 @@ public class ChronoTimer {
 
 				totRacers++;
 				racers.add(new Racer(Integer.parseInt(splitted[1]), totRacers));
-				System.out.println("Racer " + splitted[1] + "has been added");
+				System.out.println("Racer " + splitted[1] + " has been added");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("START") && power && event && run && !racers.isEmpty()) {
