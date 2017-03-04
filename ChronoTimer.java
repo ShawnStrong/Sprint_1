@@ -93,11 +93,11 @@ public class ChronoTimer {
 				racers.add(new Racer(Integer.parseInt(splitted[1]), totRacers));
 			}
 			else if (splitted[0].equalsIgnoreCase("START") && power && event && run && !racers.isEmpty()) {
-
+				trigChannel(1);
 			}
 
 			else if (splitted[0].equalsIgnoreCase("FINISH") && power && event && run && !racers.isEmpty()) {
-
+				trigChannel(2);
 			}
 			else if (splitted[0].equalsIgnoreCase("TRIG") && power && event && run) {
 				trigChannel(Integer.parseInt(splitted[1]));
