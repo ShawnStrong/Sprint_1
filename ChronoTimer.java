@@ -17,7 +17,6 @@ public class ChronoTimer {
 	static LinkedList<Racer> racers = new LinkedList<Racer>();
 	static LinkedList<Racer> toFinish = new LinkedList<Racer>();
 	static LinkedList<Racer> completed = new LinkedList<Racer>();
-	static boolean[] channelsOpen;
 	// time
 	static Clock time;
 	static LocalTime time2;
@@ -37,11 +36,10 @@ public class ChronoTimer {
 	}
 
 	public static void main(String args[]) {
-		channelsOpen = new boolean[4];
+		
 		for (int i = 0; i < 4; i++) {
 			
 			channels[i] = new Channel();
-			channelsOpen[i] = true;
 		}
 		
 		stopWatch = new Time();
@@ -57,6 +55,8 @@ public class ChronoTimer {
 
 		while (runConsole) {
 
+			System.out.println("Enter a new command \n");
+			
 			if(!power) {
 				System.out.println("POWER to turn on");
 			}
@@ -85,47 +85,56 @@ public class ChronoTimer {
 			else if (splitted[0].equalsIgnoreCase("EXIT")) {
 				
 				System.exit(0);
+				System.out.println("Exiting program, goodbye \n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("EVENT") && power) {
 				
 				event = true;
+				System.out.println("Individual event intiated \n");
 			}
 
 			else if (splitted[0].equalsIgnoreCase("RESET") && power) {
 				
 				reset();
+				System.out.println("Run has been reset\n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run) {
 				
 				run = true;
+				System.out.println("New run initiated \n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("NUM") && power && event && run) {
 
 				totRacers++;
 				racers.add(new Racer(Integer.parseInt(splitted[1]), totRacers));
+				System.out.println("Racer" + splitted[1] + "has been added");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("START") && power && event && run && !racers.isEmpty()) {
 				
 				trigChannel(1);
+				System.out.println("Race started \n");
 			}
 
 			else if (splitted[0].equalsIgnoreCase("FINISH") && power && event && run && !racers.isEmpty()) {
 				
 				trigChannel(2);
+				System.out.println("Race finish \n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("TRIG") && power && event && run) {
 				
 				trigChannel(Integer.parseInt(splitted[1]));
+				System.out.println("You have triggered " + splitted[1] + "\n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("TOG") && power && event && run) {
 				
 				togChannel(Integer.parseInt(splitted[1]));
+				System.out.println("You have toggled " + splitted[1] + "\n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("PRINT") && power && event && run) {
@@ -136,6 +145,7 @@ public class ChronoTimer {
 			else if (splitted[0].equalsIgnoreCase("ENDRUN")&& power && event && run) {
 				
 				run = false;
+				System.out.println("Run ended \n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("TIME")) {
@@ -148,7 +158,8 @@ public class ChronoTimer {
 				// Remove first racer from toFinish, set his finish time to -1, then add him to the completed list
 				Racer temp = toFinish.removeFirst();
 				temp.fin = -1;
-				completed.add(temp);	
+				completed.add(temp);
+				System.out.println("Run disqualified \n");
 			}
 
 			else if (splitted[0].equalsIgnoreCase("CANCEL")) {
@@ -157,27 +168,29 @@ public class ChronoTimer {
 				Racer temp = toFinish.removeFirst();
 				temp.start = 0;
 				racers.addFirst(temp); 
+				System.out.println("Run cancel \n");
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("LIST")) {
 
-				System.out.println("POWER: on/off \n" 
-					+ "EXIT: exits program \n" 
-					+ "RESET: reset all run times and settings \n"
-					+ "TIME: sets current time\n" 
-					+ "DNF: end that racers run, with no finish time\n" 
-					+ "NUM: to create racer\n"
-					+ "EVENT: to choose event\n"
-					+ "NEWRUN: start a new run\n"
-					+ "ENDRUN: end current run\n"
-					+ "START: activate trigger\n"
-					+ "FINISH: deactivate trigger\n"
-					+ "TRIG: trigger to activate\n"
-					+ "TOG: toggle to activate\n"
-					+ "PRINT: print results\n"
-					+ "CANCEL: discard current race\n"
-					+ "...................... \n");
-				System.out.println("Enter a command\n"
+					System.out.println("POWER: on/off \n" 
+						+ "EXIT: exits program \n" 
+						+ "RESET: reset all run times and settings \n"
+						+ "TIME: sets current time\n" 
+						+ "DNF: end that racers run, with no finish time\n" 
+						+ "NUM + (ID): to create racer\n"
+						+ "EVENT: to choose event\n"
+						+ "NEWRUN: start a new run\n"
+						+ "ENDRUN: end current run\n"
+						+ "START: activate trigger\n"
+						+ "FINISH: deactivate trigger\n"
+						+ "TRIG + (#): trigger to activate\n"
+						+ "TOG + (#): toggle to activate\n"
+						+ "PRINT: print results\n"
+						+ "CANCEL: discard current race\n"
+						+ "...................... \n");
+					
+					System.out.println("Enter a command\n");
 			}
 
 			else {
@@ -279,9 +292,8 @@ public class ChronoTimer {
 
 			if (parseInt % 2 == 1) {
 				
-				if (channels[channel].top == true && channelsOpen[channel] == true) {
+				if (channels[channel].top == true) {
 					if (!racers.isEmpty()) {
-						channelsOpen[channel] = false;
 						Racer temp = racers.remove();
 						temp.start = time.millis();
 						toFinish.add(temp);
@@ -295,9 +307,9 @@ public class ChronoTimer {
 			
 			if (parseInt % 2 == 0) {
 					
-				if (channels[channel].bottom == true && channelsOpen[channel] == false) {
+				if (channels[channel].bottom == true) {
 					if (!toFinish.isEmpty()) {
-						channelsOpen[channel] = true;
+						
 						Racer temp = toFinish.remove();
 						temp.fin = time.millis();
 						completed.add(temp);
