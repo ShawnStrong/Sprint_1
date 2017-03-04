@@ -90,8 +90,9 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("TIME")) {
 							
-							System.out.println("The current time is: \n");
-							Time.getCurrentTime();
+							Time.setTime(split[2]);
+							
+							System.out.println(Time.formatTime(Time.getEpoch()));
 						}
 						
 						else if (split[1].equalsIgnoreCase("NUM")) {
