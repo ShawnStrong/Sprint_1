@@ -1,4 +1,5 @@
 
+
 import java.util.*;
 import java.time.*;
 
@@ -9,10 +10,7 @@ public class ChronoTimer {
 	static boolean event;
 	static boolean out;
 	static Scanner console = new Scanner(System.in);
-	static Channel one = new Channel();
-	static Channel two = new Channel();
-	static Channel three = new Channel();
-	static Channel four = new Channel();
+	static Channel[] channels;
 	// race
 	static int totRacers;
 	static Queue<Racer> racers = new LinkedList<Racer>();
@@ -26,6 +24,7 @@ public class ChronoTimer {
 		ChronoTimer.power = false;
 		ChronoTimer.run = false;
 		ChronoTimer.event = false;
+		ChronoTimer.channels = new Channel[4];
 	}
 
 	public static void main(String args[]) {
@@ -47,7 +46,7 @@ public class ChronoTimer {
 			input = console.nextLine();
 			String[] splitted = input.split("\\s+");
 
-			if (input.equalsIgnoreCase("POWER")) {
+			if (splitted[0].equalsIgnoreCase("POWER")) {
 				/////// adding power call, terminates if power called ????
 				/////// change???
 				if (power == false) {
@@ -59,96 +58,77 @@ public class ChronoTimer {
 				}
 			}
 
-			else if (input.equalsIgnoreCase("EXIT")) {
+			else if (splitted[0].equalsIgnoreCase("EXIT")) {
 				System.exit(0);
 
 			}
 			
-			else if(input.equalsIgnoreCase("EVENT") && power)
+			else if(splitted[0].equalsIgnoreCase("EVENT") && power)
 			{
 				
 			}
 
-			else if (input.equalsIgnoreCase("RESET") && power) {
-				one.top = false;
-				one.bottom =false;
-				two.top =false;
-				two.bottom =false;
-				three.top =false;
-				three.bottom=false;
-				four.top =false;
-				four.bottom =false;
+			else if (splitted[0].equalsIgnoreCase("RESET") && power) {
+				channels[0].top = false;
+				channels[0].bottom = false;
+				channels[1].top = false;
+				channels[1].bottom = false;
+				channels[2].top = false;
+				channels[2].bottom = false;
+				channels[3].top = false;
+				channels[3].bottom = false;
 				//reset Racer queue to empty
 				racers.clear();
 				//reset time
 				//TODO
 			}
 			
-			else if (input.equalsIgnoreCase("NEWRUN") && power && event && !run)
+			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run)
 			{
 				run = true;
 			}
-			else if (input.equalsIgnoreCase("NUM") && power && event && run) {
+			else if (splitted[0].equalsIgnoreCase("NUM") && power && event && run) {
 
 				totRacers++;
 				racers.add(new Racer(Integer.parseInt(splitted[1]), totRacers));
 			}
-			else if (input.equalsIgnoreCase("START") && power && event && run && !racers.isEmpty()) {
+			else if (splitted[0].equalsIgnoreCase("START") && power && event && run && !racers.isEmpty()) {
 
 			}
 
-			else if (input.equalsIgnoreCase("FINISH") && power && event && run && !racers.isEmpty()) {
+			else if (splitted[0].equalsIgnoreCase("FINISH") && power && event && run && !racers.isEmpty()) {
 
 			}
-			else if (input.equalsIgnoreCase("TRIG") && power && event && run && !racers.isEmpty()) {
+			else if (splitted[0].equalsIgnoreCase("TRIG") && power && event && run && !racers.isEmpty()) {
 				System.out.println("enter which channel to trigger: ");
 				input = console.nextLine();
 				// CHECK IF INPUT IS A VALID CHANNEL NUMBER
 
 			}
-			else if (input.equalsIgnoreCase("TOG") && power && event && run) {
-
-				System.out.println("enter which lane to toggle start(1,2,3,4,5,6,7,8): \n");
-				input = console.nextLine();
-				out = false;
-				while (!out) {
-					if (input.equals("1")) {
-						one.top = (!one.top);
-
-					} else if (input.equals("3")) {
-						two.top = (!two.top);
-					} else if (input.equals("5")) {
-						three.top = (!three.top);
-					} else if (input.equals("7")) {
-						four.top = (!four.top);
-					} else {
-						System.out.println("invalid number \n");
-					}
-				}
-				startTime();
-				// finishTime() will return double of final race time
+			else if (splitted[0].equalsIgnoreCase("TOG") && power && event && run) {
+				togChannel(Integer.parseInt(splitted[1]));
 			}
-			else if (input.equalsIgnoreCase("PRINT") && power && event && run){
+			else if (splitted[0].equalsIgnoreCase("PRINT") && power && event && run){
 				
 			}
-			else if (input.equalsIgnoreCase("ENDRUN")&& power && event && run){
+			else if (splitted[0].equalsIgnoreCase("ENDRUN")&& power && event && run){
 				run = false;
 			}
-			else if (input.equalsIgnoreCase("TIME")) {
+			else if (splitted[0].equalsIgnoreCase("TIME")) {
 
 			}
 			
 
 			
 
-			else if (input.equalsIgnoreCase("DNF")) {
+			else if (splitted[0].equalsIgnoreCase("DNF")) {
 
 			}
 
-			else if (input.equalsIgnoreCase("CANCEL")) {
+			else if (splitted[0].equalsIgnoreCase("CANCEL")) {
 
 			}
-			else if (input.equalsIgnoreCase("LIST")) {
+			else if (splitted[0].equalsIgnoreCase("LIST")) {
 
 				System.out.println("POWER: end program. \n" + "EXIT: \n" + "RESET: reset all run times and settings \n"
 						+ "TIME: \n" + "DNF: end that racers run, with no finish time\n" + "NUM: to create racer\n"
@@ -176,15 +156,38 @@ public class ChronoTimer {
 		return power;
 	}
 
-	static void setPower() {
+	static boolean setPower() {
 
-		power = !power;	
-		
-		if (power == true) {
-			
-			System.out.println("The power is on \n");
+		if (!power) {
+			power = true;
+		} else if (power) {
+			power = false;
+			// end program? restart simulator?
+		} else {
+			return false;
 		}
-		
-		System.out.println("The power is off \n");
+
+		return true;
+
+	}
+
+	static void togChannel(int input){
+		int channel = (int) Math.ceil((double) input / 2) - 1;
+		if(input % 2 == 1){
+			
+			if(!channels[channel].bottom){
+				channels[channel].bottom = true;
+			}
+			else{
+				channels[channel].bottom = false;
+			}
+		}else{
+			if(!channels[channel].top){
+				channels[channel].top = true;
+			}
+			else{
+				channels[channel].top = false;
+			}
+		}
 	}
 }
