@@ -24,8 +24,8 @@ public class ChronoTimer {
 	public ChronoTimer() {
 
 		ChronoTimer.power = false;
-		this.run = false;
-		this.event = false;
+		ChronoTimer.run = false;
+		ChronoTimer.event = false;
 	}
 
 	public static void main(String args[]) {
