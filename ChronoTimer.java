@@ -329,4 +329,114 @@ public class ChronoTimer {
 			System.out.println("invlaid channel number");
 		}
 	}	
+	
+	/*static void trigChannel(int parseInt)
+	{
+		
+		int channel = (int) Math.ceil((double) parseInt / 2) - 1;
+		
+		if (channel < 3 && channel >= 0)
+		{
+			if (parseInt % 2 == 1) 
+			{
+				if (channels[channel].top == true) 
+				{
+					if(channelsOpen[channel] == true)
+					{
+						if (!racers.isEmpty()) 
+						{
+							channelsOpen[channel] = false;
+							Racer temp = racers.remove();
+							temp.start = time.millis();
+							toFinish.add(temp);
+						} 
+					}
+					//reset racers start time if called more than once
+					else
+					{
+						long tempStart = time.millis();
+						Iterator<Racer> tempList = toFinish.iterator();
+						Racer temp = null;
+						
+						int i = 0;
+						while (tempList.hasNext())
+						{
+							Racer ittt = tempList.next();
+		////////////////////is index right one?
+							if(ittt.x == channel)
+							{
+								temp = ittt;
+							}
+							
+						}
+						if(temp != null)
+						{
+							temp.start = tempStart;
+						}
+						else
+						{
+							System.out.println("replace start didn't work");
+						}
+						
+					}
+				}
+				else 
+				{
+					System.out.println("channel was not toggled");
+				}
+
+			}
+			if (parseInt % 2 == 0) {
+					
+				if (channels[channel].bottom == true) 
+				{
+					if(channelsOpen[channel] == false)
+					{
+						if (!toFinish.isEmpty()) {
+							channelsOpen[channel] = true;
+							Racer temp = toFinish.remove();
+							temp.fin = time.millis();
+							completed.add(temp);
+						}
+					}
+					else
+					{
+						long tempFin = time.millis();
+						Iterator<Racer> tempList = toFinish.iterator();
+						Racer temp = null;
+						
+						int i = 0;
+						while (tempList.hasNext())
+						{
+							Racer ittt = tempList.next();
+		////////////////////is index right one?
+							if(ittt.y == channel)
+							{
+								temp = ittt;
+							}
+							
+						}
+						if(temp != null)
+						{
+							temp.fin = tempFin;
+						}
+						else
+						{
+							System.out.println("replace fin didn't work");
+						}
+					}
+			} 
+					
+			else 
+			{
+					System.out.println("channel was not toggled");
+			}
+				
+			}
+		}
+		
+		else {
+			System.out.println("invlaid channel number");
+		}*/
+	}	
 }
