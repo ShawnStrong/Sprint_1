@@ -99,6 +99,8 @@ public class ChronoTimer {
 				
 				reset();
 				System.out.println("Run has been reset\n");
+				System.out.println("Waiting for Event command: Type 'Event'\n");
+
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run) {
