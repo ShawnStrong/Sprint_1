@@ -199,6 +199,7 @@ public class ChronoTimer {
 						+ "TOG + (#): toggle to activate\n"
 						+ "PRINT: print results\n"
 						+ "CANCEL: discard current race\n"
+						+ "PRINTlists: Print list of racer\n"
 						+ "...................... \n");
 			}
 
