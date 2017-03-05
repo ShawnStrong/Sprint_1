@@ -1,5 +1,3 @@
-package home;
-
 import java.util.*;
 import java.time.*;
 
@@ -164,10 +162,10 @@ public class ChronoTimer {
 			else if (splitted[0].equalsIgnoreCase("DNF") && !toFinish.isEmpty()) {
 				// Remove first racer from toFinish, set his finish time to -1, then add him to the completed list
 				Racer temp = toFinish.removeFirst();
-				System.out.println("\nRacer "+temp.racerNum+" did not finish.\n");
+				System.out.println("Racer "+temp.racerNum+" did not finish.");
 				temp.fin = -1;
 				completed.add(temp);
-				System.out.println("\nRun disqualified \n");
+				System.out.println("Run disqualified \n");
 			}
 
 			else if (splitted[0].equalsIgnoreCase("CANCEL") && !toFinish.isEmpty()) {
@@ -197,7 +195,6 @@ public class ChronoTimer {
 						+ "TOG + (#): toggle to activate\n"
 						+ "PRINT: print results\n"
 						+ "CANCEL: discard current race\n"
-						+ "PRINTlists: list of current racers\n"
 						+ "...................... \n");
 			}
 
