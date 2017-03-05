@@ -156,18 +156,20 @@ public class ChronoTimer {
 				System.out.println("You set the time at: " + splitted[1] + "\n");
 			}
 		
-			else if (splitted[0].equalsIgnoreCase("DNF")) {
+			else if (splitted[0].equalsIgnoreCase("DNF") && !toFinish.isEmpty()) {
 				// Remove first racer from toFinish, set his finish time to -1, then add him to the completed list
 				Racer temp = toFinish.removeFirst();
+				System.out.println("Racer "+temp.racerNum+" did not finish.");
 				temp.fin = -1;
 				completed.add(temp);
 				System.out.println("Run disqualified \n");
 			}
 
-			else if (splitted[0].equalsIgnoreCase("CANCEL")) {
+			else if (splitted[0].equalsIgnoreCase("CANCEL") && !toFinish.isEmpty()) {
 				
 				// Remove first racer from toFinish, set his start time to 0, then add him to racers
 				Racer temp = toFinish.removeFirst();
+				System.out.println("Racer "+temp.racerNum+" moved back to start.");
 				temp.start = 0;
 				racers.addFirst(temp); 
 				System.out.println("Run cancel \n");
@@ -204,7 +206,7 @@ public class ChronoTimer {
 		for(int i = 0; i < completed.size(); i++) {
 			
 			Racer temp = completed.get(i);
-			System.out.println("\nRacer " + temp.racerNum + " time: " + (temp.fin - temp.start) + "\n");
+			System.out.println("Racer " + temp.racerNum + " time: " + stopWatch.formatTime((temp.fin - temp.start)));
 		}
 	}
 	
