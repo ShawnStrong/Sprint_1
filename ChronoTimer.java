@@ -110,8 +110,9 @@ public class ChronoTimer {
 			
 			else if (splitted[0].equalsIgnoreCase("NUM") && power && event && run) {
 
-				totRacers++;
+				
 				racers.add(new Racer(Integer.parseInt(splitted[1]), totRacers));
+				totRacers++;
 				System.out.println("Racer " + splitted[1] + " has been added");
 			}
 			
@@ -287,34 +288,74 @@ public class ChronoTimer {
 	}
 	
 	static void trigChannel(int parseInt) {
-		
+		// convert parseInt (0-3) to channel (1-8)
 		int channel = (int) Math.ceil((double) parseInt / 2) - 1;
 		
+		// used for determining which list a racer is in
+		boolean found = false;
+		
 		if (channel < 3 && channel >= 0) {
-
+			// determine if start or finish channel
 			if (parseInt % 2 == 1) {
 				
 				if (channels[channel].top == true) {
-					if (!racers.isEmpty()) {
-						Racer temp = racers.remove();
-						temp.start = time.millis();
-						toFinish.add(temp);
+					// first, check if racer already started. If so, update his start time
+					if(!toFinish.isEmpty()){
+						for(Racer s : toFinish){
+							if(s.index == channel){
+								s.start = time.millis();
+								found = true;
+							}
+						}
+					}
+					// If not, start the racer
+					if (!racers.isEmpty() && !found) {
+						for(Racer s : racers){
+							if(s.index == channel){
+								racers.remove(s);
+								s.start = time.millis();
+								toFinish.add(s);
+								found = true;
+							}
+						}
 					} 
+					// if no racer found attached to channel
+					if(!found){
+						System.out.println("No racer linked to that channel.");
+					}
 				}
 				else {
 					System.out.println("channel was not toggled");
 				}
 
 			}
-			
+			// determine if finish channel
 			if (parseInt % 2 == 0) {
-					
 				if (channels[channel].bottom == true) {
-					if (!toFinish.isEmpty()) {
+					// First, check if racer has already finished. If so, update his finish time
+					// If not, finish him
+					if (!completed.isEmpty()) {
 						
-						Racer temp = toFinish.remove();
-						temp.fin = time.millis();
-						completed.add(temp);
+						for(Racer s : completed){
+							if(s.index == channel){
+								s.fin = time.millis();
+								found = true;
+							}
+						}
+					}
+					if(!toFinish.isEmpty() && !found){
+						for(Racer s : toFinish){
+							if(s.index == channel){
+								toFinish.remove(s);
+								s.fin = time.millis();
+								completed.add(s);
+								found = true;
+							}
+						}
+					}
+					// if no racer found attached to channel
+					if(!found){
+						System.out.println("No racer linked to that channel.");
 					}
 			} 
 					
@@ -329,114 +370,24 @@ public class ChronoTimer {
 			System.out.println("invlaid channel number");
 		}
 	}	
-	
-	/*static void trigChannel(int parseInt)
-	{
+	static void printlists(){
 		
-		int channel = (int) Math.ceil((double) parseInt / 2) - 1;
-		
-		if (channel < 3 && channel >= 0)
-		{
-			if (parseInt % 2 == 1) 
-			{
-				if (channels[channel].top == true) 
-				{
-					if(channelsOpen[channel] == true)
-					{
-						if (!racers.isEmpty()) 
-						{
-							channelsOpen[channel] = false;
-							Racer temp = racers.remove();
-							temp.start = time.millis();
-							toFinish.add(temp);
-						} 
-					}
-					//reset racers start time if called more than once
-					else
-					{
-						long tempStart = time.millis();
-						Iterator<Racer> tempList = toFinish.iterator();
-						Racer temp = null;
-						
-						int i = 0;
-						while (tempList.hasNext())
-						{
-							Racer ittt = tempList.next();
-		////////////////////is index right one?
-							if(ittt.x == channel)
-							{
-								temp = ittt;
-							}
-							
-						}
-						if(temp != null)
-						{
-							temp.start = tempStart;
-						}
-						else
-						{
-							System.out.println("replace start didn't work");
-						}
-						
-					}
-				}
-				else 
-				{
-					System.out.println("channel was not toggled");
-				}
-
-			}
-			if (parseInt % 2 == 0) {
-					
-				if (channels[channel].bottom == true) 
-				{
-					if(channelsOpen[channel] == false)
-					{
-						if (!toFinish.isEmpty()) {
-							channelsOpen[channel] = true;
-							Racer temp = toFinish.remove();
-							temp.fin = time.millis();
-							completed.add(temp);
-						}
-					}
-					else
-					{
-						long tempFin = time.millis();
-						Iterator<Racer> tempList = toFinish.iterator();
-						Racer temp = null;
-						
-						int i = 0;
-						while (tempList.hasNext())
-						{
-							Racer ittt = tempList.next();
-		////////////////////is index right one?
-							if(ittt.y == channel)
-							{
-								temp = ittt;
-							}
-							
-						}
-						if(temp != null)
-						{
-							temp.fin = tempFin;
-						}
-						else
-						{
-							System.out.println("replace fin didn't work");
-						}
-					}
-			} 
-					
-			else 
-			{
-					System.out.println("channel was not toggled");
-			}
-				
-			}
+		System.out.println("racers: ");
+		for(Racer s : racers){
+			System.out.print("      ");
+			System.out.println("Racer " + s.racerNum + " start: " + stopWatch.formatTime(s.start) + " finish: " + stopWatch.formatTime(s.fin));
 		}
 		
-		else {
-			System.out.println("invlaid channel number");
-		}*/
-	}	
+		System.out.println("toFinish: ");
+		for(Racer s : toFinish){
+			System.out.print("      ");
+			System.out.println("Racer " + s.racerNum + " start: " + stopWatch.formatTime(s.start) + " finish: " + stopWatch.formatTime(s.fin));
+		}
+		
+		System.out.println("completed: ");
+		for(Racer s : completed){
+			System.out.print("      ");
+			System.out.println("Racer " + s.racerNum + " start: " + stopWatch.formatTime(s.start) + " finish: " + stopWatch.formatTime(s.fin));
+		}
+	}
 }
