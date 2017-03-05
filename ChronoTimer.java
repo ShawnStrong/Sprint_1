@@ -261,6 +261,7 @@ public class ChronoTimer {
 		racers.clear();
 		toFinish.clear();
 		completed.clear();
+		totRacers = 0;
 	}
 	
 	static void togChannel(int input) {
