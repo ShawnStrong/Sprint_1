@@ -99,8 +99,6 @@ public class ChronoTimer {
 				
 				reset();
 				System.out.println("Run has been reset\n");
-				System.out.println("Waiting for Event command: Type 'Event'\n");
-
 			}
 			
 			else if (splitted[0].equalsIgnoreCase("NEWRUN") && power && event && !run) {
@@ -199,7 +197,6 @@ public class ChronoTimer {
 						+ "TOG + (#): toggle to activate\n"
 						+ "PRINT: print results\n"
 						+ "CANCEL: discard current race\n"
-						+ "PRINTlists: Print list of racer\n"
 						+ "...................... \n");
 			}
 
@@ -301,6 +298,9 @@ public class ChronoTimer {
 		// used for determining which list a racer is in
 		boolean found = false;
 		
+		// list of elements to remove from list
+		LinkedList<Racer> temp = new LinkedList<>();
+		
 		if (channel < 3 && channel >= 0) {
 			// determine if start or finish channel
 			if (parseInt % 2 == 1) {
@@ -319,12 +319,13 @@ public class ChronoTimer {
 					if (!racers.isEmpty() && !found) {
 						for(Racer s : racers){
 							if(s.index == channel){
-								racers.remove(s);
+								temp.add(s);
 								s.start = time.millis();
 								toFinish.add(s);
 								found = true;
 							}
 						}
+						racers.removeAll(temp);
 					} 
 					// if no racer found attached to channel
 					if(!found){
@@ -353,12 +354,13 @@ public class ChronoTimer {
 					if(!toFinish.isEmpty() && !found){
 						for(Racer s : toFinish){
 							if(s.index == channel){
-								toFinish.remove(s);
+								temp.add(s);
 								s.fin = time.millis();
 								completed.add(s);
 								found = true;
 							}
 						}
+						toFinish.removeAll(temp);
 					}
 					// if no racer found attached to channel
 					if(!found){
