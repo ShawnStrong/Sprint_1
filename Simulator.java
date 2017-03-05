@@ -104,8 +104,9 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("NUM")) {
 							
-							ChronoTimer.totRacers++;
+							
 							ChronoTimer.racers.add(new Racer(Integer.parseInt(split[2]), ChronoTimer.totRacers));
+							ChronoTimer.totRacers++;
 							System.out.println("Racer: " + split[2] + " has been entered!\n");
 						}
 						
