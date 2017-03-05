@@ -144,6 +144,10 @@ public class ChronoTimer {
 				
 				receipt();
 			}
+			else if (splitted[0].equalsIgnoreCase("PRINTlists")) {
+				
+				printlists();
+			}
 			
 			else if (splitted[0].equalsIgnoreCase("ENDRUN")&& power && event && run) {
 				
