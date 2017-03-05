@@ -92,7 +92,7 @@ Simulator() {
 						
 						else if (split[1].equalsIgnoreCase("ENDRUN")) {
 							
-							ChronoTimer.run = false;
+							ChronoTimer.endrun();
 							System.out.println("\nRun ended\n");
 						}
 						
