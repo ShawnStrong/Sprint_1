@@ -151,7 +151,7 @@ public class ChronoTimer {
 			
 			else if (splitted[0].equalsIgnoreCase("ENDRUN")&& power && event && run) {
 				
-				run = false;
+				endrun();
 				System.out.println("Run ended \n");
 			}
 			
@@ -244,6 +244,14 @@ public class ChronoTimer {
 		else {
 			System.out.println("\nThe power is off\n");
 		}
+	}
+	
+	static void endrun(){
+		run = false;
+		racers.clear();
+		toFinish.clear();
+		completed.clear();
+		totRacers = 0;
 	}
 	
 	static void reset() {
